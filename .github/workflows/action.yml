@@ -21,4 +21,6 @@ jobs:
         if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
         run: echo "Job is enabled!"
 
+      - name: echo jobs
+        run: echo "kamlesh"
       # Additional steps for the job go here
