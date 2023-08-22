@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: ls all file
-        run: ls -al
       - name: Read metadata
         id: metadata
         run: |
