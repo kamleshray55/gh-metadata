@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Read metadata
+        id: metadata
         run: |
           echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME metadata.json)"
 
@@ -28,10 +29,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Read metadata
+        id: metadata
         run: |
           echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME metadata.json)"
 
       - name: Run job based on metadata
         id: metadata-job
-        if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
+        if: ${{ steps.metadata.outputs.ENV_NAME == 'kamlesh' }}
         run: echo "Job is enabled!"
