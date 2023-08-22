@@ -18,8 +18,8 @@ jobs:
 
   job2:
     runs-on: ubuntu-latest
+    needs: metadata
     steps:
       - name: Run job based on metadata
-        needs: metadata
         if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
         run: echo "Creating DEV environment"
