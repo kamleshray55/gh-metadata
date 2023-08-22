@@ -8,6 +8,8 @@ on:
 jobs:
   metadata:
     runs-on: ubuntu-latest
+    outputs:
+      env-name: ${{ steps.metadata.outputs.ENV_NAME }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -21,5 +23,5 @@ jobs:
     needs: metadata
     steps:
       - name: Run job based on metadata
-        if: ${{ needs.metadata.outputs.ENV_NAME == 'dev' }}
+        if: ${{ needs.metadata.outputs.env-name == 'dev' }}
         run: echo "Creating DEV environment"
