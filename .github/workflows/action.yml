@@ -18,7 +18,6 @@ jobs:
       - name: ls all file
         run: |
           ls -al
-          cat metadata.json
 
       - name: Read metadata
         id: metadata
