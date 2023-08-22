@@ -16,7 +16,9 @@ jobs:
           ref: ${{ github.sha }}
 
       - name: ls all file
-        run: ls -al
+        run: |
+          ls -al
+          cat metadata.json
 
       - name: Read metadata
         id: metadata
@@ -25,5 +27,5 @@ jobs:
 
       - name: Run job based on metadata
         id: metadata-job
-        if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
+        if: ${{ steps.metadata.outputs.ENV_NAME == 'preprod' }}
         run: echo "Creating DEV environment"
