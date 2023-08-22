@@ -18,5 +18,5 @@ jobs:
 
       - name: Run job based on metadata
         id: metadata-job
-        if: ${{ steps.metadata.outputs.ENV_NAME == 'preprod' }}
+        if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
         run: echo "Creating DEV environment"
