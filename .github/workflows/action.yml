@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          path: "metadata.json"
 
       - name: Read metadata
         id: metadata
