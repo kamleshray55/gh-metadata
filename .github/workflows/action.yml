@@ -1,0 +1,30 @@
+name: Control Workflow with Metadata
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  my_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Read metadata
+        id: metadata
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const metadataContent = fs.readFileSync('metadata.yml', 'utf8');
+            const metadata = yaml.load(metadataContent);
+            console.log(JSON.stringify(metadata));
+            return metadata
+
+      - name: Run job based on metadata
+        if: steps.metadata.outputs.metadata.job_enabled == 'true'
+        run: echo "Job is enabled!"
+
+      # Additional steps for the job go here
