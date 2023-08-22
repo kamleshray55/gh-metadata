@@ -21,6 +21,17 @@ jobs:
         if: ${{ steps.metadata.outputs.ENV_NAME == 'kamlesh' }}
         run: echo "Job is enabled!"
 
-      - name: echo jobs
-        run: echo "kamlesh"
-      # Additional steps for the job go here
+  my_job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Read metadata
+        run: |
+          echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME metadata.json)"
+
+      - name: Run job based on metadata
+        id: metadata-job
+        if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
+        run: echo "Job is enabled!"
