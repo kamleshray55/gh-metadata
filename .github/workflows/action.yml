@@ -20,11 +20,11 @@ jobs:
       - name: Read metadata
         id: metadata
         run: |
-          echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME metadata.json)"
+          echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME infraMetadata.json)"
 
   job2:
     runs-on: ubuntu-latest
-    if: ${{ needs.metadata.outputs.env-name == 'kamlesh' }}
+    if: ${{ needs.metadata.outputs.env-name == 'dev' }}
     needs: metadata
     steps:
       - name: Run job based on metadata
