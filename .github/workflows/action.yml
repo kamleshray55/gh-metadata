@@ -18,7 +18,7 @@ jobs:
 
       - name: Run job based on metadata
         id: metadata-job
-        if: ${{ steps.metadata.outputs.ENV_NAME == 'kamlesh' }}
+        if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
         run: echo "Job is enabled!"
 
   my_job2:
