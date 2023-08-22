@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  my_job:
+  metadata:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -14,9 +14,11 @@ jobs:
       - name: Read metadata
         id: metadata
         run: |
-          echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME metadata.json)"
+          echo "ENV_NAME=$(jq -r .ENV_NAME metadata.json)" >> $GITHUB_ENV
 
-      - name: Run job based on metadata
-        id: metadata-job
-        if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
-        run: echo "Creating DEV environment"
+  job2:
+    name: Run job based on metadata
+    needs: metadata
+    id: metadata-job
+    if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
+    run: echo "Creating DEV environment"
