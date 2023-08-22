@@ -12,27 +12,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "14"
-
-      - name: Install js-yaml
-        run: npm install js-yaml
-
       - name: Read metadata
         id: metadata
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require('fs');
-            const metadataContent = fs.readFileSync('metadata.yml', 'utf8');
-            const metadata = yaml.load(metadataContent);
-            console.log(JSON.stringify(metadata));
-            return metadata
+        run: |
+          echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME metadata.json)"
 
       - name: Run job based on metadata
-        if: steps.metadata.outputs.metadata.job_enabled == 'true'
+        if: ${{ steps.read_metadata.outputs.ENV_NAME == 'dev' }}
         run: echo "Job is enabled!"
 
       # Additional steps for the job go here
