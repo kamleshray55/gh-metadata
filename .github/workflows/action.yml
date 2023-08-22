@@ -20,7 +20,7 @@ jobs:
       - name: Read metadata
         id: metadata
         run: |
-          echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME infraMetadata.json)"
+          echo "ENV_NAME=$(jq -r .ENV_NAME metadata.json)" >> $GITHUB_ENV
 
   job2:
     runs-on: ubuntu-latest
