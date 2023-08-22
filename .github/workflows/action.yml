@@ -24,7 +24,7 @@ jobs:
 
   job2:
     runs-on: ubuntu-latest
-    if: ${{ needs.metadata.outputs.env-name == 'dev' }}
+    if: ${{ needs.metadata.outputs.env-name == 'kamlesh' }}
     needs: metadata
     steps:
       - name: Run job based on metadata
