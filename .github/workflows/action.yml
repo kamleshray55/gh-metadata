@@ -11,6 +11,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          path: "metadata.json"
+          ref: ${{ github.sha }}
+
+      - name: ls all file
+        run: ls -al
 
       - name: Read metadata
         id: metadata
@@ -20,20 +26,4 @@ jobs:
       - name: Run job based on metadata
         id: metadata-job
         if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
-        run: echo "Job is enabled!"
-
-  my_job2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Read metadata
-        id: metadata
-        run: |
-          echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME metadata.json)"
-
-      - name: Run job based on metadata
-        id: metadata-job
-        if: ${{ steps.metadata.outputs.ENV_NAME == 'kamlesh' }}
-        run: echo "Job is enabled!"
+        run: echo "Creating DEV environment"
