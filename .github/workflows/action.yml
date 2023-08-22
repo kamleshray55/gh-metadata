@@ -18,7 +18,7 @@ jobs:
           echo "::set-output name=ENV_NAME::$(jq -r .ENV_NAME metadata.json)"
 
       - name: Run job based on metadata
-        if: ${{ steps.read_metadata.outputs.ENV_NAME == 'dev' }}
+        if: ${{ steps.metadata.outputs.ENV_NAME == 'dev' }}
         run: echo "Job is enabled!"
 
       # Additional steps for the job go here
